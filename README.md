@@ -1,7 +1,7 @@
 ol2-externs
 ===========
 
-OpenLayers 2.x externs for Closure compiler.
+[Closure Compiler](https://developers.google.com/closure/compiler/) externs for [OpenLayers 2.x](http://www.openlayers.org/).
 
 The code is maintained manually for latest stable OpenLayers 2.x version.
 It covers only subset of OpenLayers functionality.
