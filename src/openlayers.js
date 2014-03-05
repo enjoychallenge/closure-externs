@@ -50,6 +50,29 @@ OpenLayers.Bounds.prototype.top;
 OpenLayers.Bounds.prototype.clone = function() {};
 
 /**
+ * @param {number} x
+ * @param {number} y
+ * @param {boolean=} opt_inclusive
+ * @return boolean
+ */
+OpenLayers.Bounds.prototype.contains = function(x, y, opt_inclusive) {};
+
+/**
+ * @param {OpenLayers.Bounds} bounds
+ * @param {boolean=} opt_partial
+ * @param {boolean=} opt_inclusive
+ * @return boolean
+ */
+OpenLayers.Bounds.prototype.containsBounds = function(bounds, opt_partial, opt_inclusive) {};
+
+/**
+ * @param {OpenLayers.LonLat} lonLat
+ * @param {Object=} opt_options
+ * @return boolean
+ */
+OpenLayers.Bounds.prototype.containsLonLat = function(lonLat, opt_options) {};
+
+/**
  * @param {OpenLayers.LonLat|OpenLayers.Geometry.Point|OpenLayers.Bounds} obj
  */
 OpenLayers.Bounds.prototype.extend = function(obj) {};
@@ -60,8 +83,26 @@ OpenLayers.Bounds.prototype.extend = function(obj) {};
 OpenLayers.Bounds.prototype.getCenterLonLat = function() {};
 
 /**
+ * @return {number}
+ */
+OpenLayers.Bounds.prototype.getHeight = function() {};
+
+/**
+ * @return {number}
+ */
+OpenLayers.Bounds.prototype.getWidth = function() {};
+
+/**
+ * @param {OpenLayers.Bounds} bounds
+ * @param {Object=} opt_options
+ * @return boolean
+ */
+OpenLayers.Bounds.prototype.intersectsBounds = function(bounds, opt_options) {};
+
+/**
  * @param {number} ratio
  * @param {(OpenLayers.LonLat|OpenLayers.Pixel)=} opt_origin
+ * @return {OpenLayers.Bounds}
  */
 OpenLayers.Bounds.prototype.scale = function(ratio, opt_origin) {};
 
@@ -97,23 +138,32 @@ OpenLayers.Class = function(parentClass, definition) {};
 OpenLayers.Control = function(opt_options) {};
 
 /**
- */
-OpenLayers.Control.prototype.activate = function() {};
-
-/**
  * @type {OpenLayers.Events}
  */
 OpenLayers.Control.prototype.events;
 
 /**
- * @type {Object}
+ * @type {OpenLayers.Handler}
  */
-OpenLayers.Control.prototype.handlers;
+OpenLayers.Control.prototype.handler;
 
 /**
- * @param {Object} options
+ * @type {Object}
  */
-OpenLayers.Control.prototype.initialize = function(options) {};
+OpenLayers.Control.prototype.handlerOptions;
+
+/**
+ */
+OpenLayers.Control.prototype.activate = function() {};
+
+/**
+ */
+OpenLayers.Control.prototype.deactivate = function() {};
+
+/**
+ * @param {Object=} opt_options
+ */
+OpenLayers.Control.prototype.initialize = function(opt_options) {};
 
 /**
  * @extends {OpenLayers.Control}
@@ -236,6 +286,11 @@ OpenLayers.Feature = function(layer, lonlat, data) {};
  * @type {Object}
  */
 OpenLayers.Feature.prototype.attributes;
+
+/**
+ * @type {OpenLayers.Marker}
+ */
+OpenLayers.Feature.prototype.marker;
 
 /**
  * @param {OpenLayers.Geometry} geometry
@@ -493,11 +548,36 @@ OpenLayers.Geometry.prototype.toString = function() {};
 OpenLayers.Geometry.Collection = function(components) {};
 
 /**
+ * @type {Array.<OpenLayers.Geometry>}
+ */
+OpenLayers.Geometry.Collection.prototype.components;
+
+/**
+ * @param {Array.<OpenLayers.Geometry.Point>} points
+ * @extends {OpenLayers.Geometry.LineString}
+ * @constructor
+ */
+OpenLayers.Geometry.LinearRing = function(points) {};
+
+/**
+ * @param {OpenLayers.Geometry.Point} point
+ * @return {number|boolean}
+ */
+OpenLayers.Geometry.LinearRing.prototype.containsPoint = function(point) {};
+
+/**
  * @param {Array.<OpenLayers.Geometry.Point>} points
  * @extends {OpenLayers.Geometry.Collection}
  * @constructor
  */
-OpenLayers.Geometry.LinearRing = function(points) {};
+OpenLayers.Geometry.LineString = function(points) {};
+
+/**
+ * @param {Array.<OpenLayers.Geometry.Polygon>} components
+ * @extends {OpenLayers.Geometry.Collection}
+ * @constructor
+ */
+OpenLayers.Geometry.MultiPolygon = function(components) {};
 
 /**
  * @param {number} x
@@ -535,6 +615,12 @@ OpenLayers.Geometry.Point.prototype.transform = function(source, dest) {};
  * @constructor
  */
 OpenLayers.Geometry.Polygon = function(rings) {};
+
+/**
+ * @param {OpenLayers.Geometry.Point} point
+ * @return {number|boolean}
+ */
+OpenLayers.Geometry.Polygon.prototype.containsPoint = function(point) {};
 
 /**
  * @param {OpenLayers.Control} control
@@ -601,6 +687,15 @@ OpenLayers.Handler.Feature.prototype.stopDown;
  * @type {boolean}
  */
 OpenLayers.Handler.Feature.prototype.stopUp;
+
+/**
+ * @param {string} url
+ * @param {OpenLayers.Size|Object} size
+ * @param {OpenLayers.Pixel|Object} offset
+ * @param {Function} calculateOffset
+ * @constructor
+ */
+OpenLayers.Icon = function(url, size, offset, calculateOffset) {};
 
 /**
  * @constructor
@@ -688,6 +783,11 @@ OpenLayers.Layer.prototype.setVisibility = function(visible) {};
 OpenLayers.Layer.ArcGIS93Rest = function(name, url, opt_params, opt_options) {};
 
 /**
+ * @param {OpenLayers.Bounds} bounds
+ */
+OpenLayers.Layer.ArcGIS93Rest.prototype.getURL = function(bounds) {};
+
+/**
  * @type {string}
  * @override
  */
@@ -747,6 +847,12 @@ OpenLayers.Layer.HTTPRequest.prototype.url;
 OpenLayers.Layer.HTTPRequest.prototype.mergeNewParams = function(newParams) {};
 
 /**
+ * @param {Object=} opt_newParams
+ * @param {string=} opt_altUrl
+ */
+OpenLayers.Layer.HTTPRequest.prototype.getFullRequestString = function(opt_newParams, opt_altUrl) {};
+
+/**
  * @param {string=} opt_title
  * @param {string|Array.<string>=} opt_tiles
  * @param {Object=} opt_options
@@ -797,6 +903,12 @@ OpenLayers.Layer.Vector.prototype.getFeatureById = function(featureId) {};
 /**
  */
 OpenLayers.Layer.Vector.prototype.removeAllFeatures = function() {};
+
+/**
+ * @param {Array.<OpenLayers.Feature.Vector>} features
+ * @param {Object=} opt_options
+ */
+OpenLayers.Layer.Vector.prototype.removeFeatures = function(features, opt_options) {};
 
 /**
  * @param {string} title
@@ -862,6 +974,12 @@ OpenLayers.LonLat.prototype.equals = function(that) {};
  * @return {string}
  */
 OpenLayers.LonLat.prototype.toShortString = function() {};
+
+/**
+ * @param {OpenLayers.Projection} source
+ * @param {OpenLayers.Projection} dest
+ */
+OpenLayers.LonLat.prototype.transform = function(source, dest) {};
 
 /**
  * @param {string} div
@@ -950,6 +1068,13 @@ OpenLayers.Map.prototype.getControlsByClass = function(match) {};
 OpenLayers.Map.prototype.getExtent = function() {};
 
 /**
+ * @param {string} property
+ * @param {string|Object} match
+ * @return {Array.<OpenLayers.Layer>}
+ */
+OpenLayers.Map.prototype.getLayersBy = function(property, match) {};
+
+/**
  * @param {string|Object} match
  * @return {Array.<OpenLayers.Layer>}
  */
@@ -962,6 +1087,11 @@ OpenLayers.Map.prototype.getLayersByClass = function(match) {};
 OpenLayers.Map.prototype.getLonLatFromPixel = function(px) {};
 
 /**
+ * @return {number}
+ */
+OpenLayers.Map.prototype.getNumZoomLevels = function() {};
+
+/**
  * @return {OpenLayers.Projection}
  */
 OpenLayers.Map.prototype.getProjectionObject = function() {};
@@ -972,6 +1102,12 @@ OpenLayers.Map.prototype.getProjectionObject = function() {};
 OpenLayers.Map.prototype.getResolution = function() {};
 
 /**
+ * @param {number} zoom
+ * @return {?number}
+ */
+OpenLayers.Map.prototype.getResolutionForZoom = function(zoom) {};
+
+/**
  * @return {number}
  */
 OpenLayers.Map.prototype.getScale = function() {};
@@ -980,6 +1116,35 @@ OpenLayers.Map.prototype.getScale = function() {};
  * @return {OpenLayers.Size}
  */
 OpenLayers.Map.prototype.getSize = function() {};
+
+/**
+ * @return {?string}
+ */
+OpenLayers.Map.prototype.getUnits = function() {};
+
+/**
+ * @return {number}
+ */
+OpenLayers.Map.prototype.getZoom = function() {};
+
+/**
+ * @param {OpenLayers.Bounds} bounds
+ * @param {boolean=} opt_closest
+ * @return {?number}
+ */
+OpenLayers.Map.prototype.getZoomForExtent = function(bounds, opt_closest) {};
+
+/**
+ * @param {number} resolution
+ * @param {boolean=} opt_closest
+ * @return {?number}
+ */
+OpenLayers.Map.prototype.getZoomForResolution = function(resolution, opt_closest) {};
+
+/**
+ * @param {OpenLayers.LonLat} lonlat
+ */
+OpenLayers.Map.prototype.panTo = function(lonlat) {};
 
 /**
  * @param {OpenLayers.Layer} layer
@@ -1013,6 +1178,13 @@ OpenLayers.Map.prototype.updateSize = function() {};
  * @param {boolean=} opt_closest
  */
 OpenLayers.Map.prototype.zoomToExtent = function(bounds, opt_closest) {};
+
+/**
+ * @param {OpenLayers.LonLat} lonlat
+ * @param {OpenLayers.Icon} icon
+ * @constructor
+ */
+OpenLayers.Marker = function(lonlat, icon) {};
 
 /**
  * @param {number} x
@@ -1253,4 +1425,18 @@ OpenLayers.Util.extend = function(destination, source) {};
  * @return {Object}
  */
 OpenLayers.Util.getParameters = function(url) {};
+
+/**
+ * @param {number} scale
+ * @param {string?} units
+ * @return {number|undefined}
+ */
+OpenLayers.Util.getResolutionFromScale = function(scale, units) {};
+
+/**
+ * @param {number} resolution
+ * @param {string?} units
+ * @return {number}
+ */
+OpenLayers.Util.getScaleFromResolution = function(resolution, units) {};
 
