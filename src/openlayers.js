@@ -169,18 +169,6 @@ OpenLayers.Control.prototype.initialize = function(opt_options) {};
  * @extends {OpenLayers.Control}
  * @constructor
  */
-OpenLayers.Control.Navigation = function() {};
-
-/**
- * @extends {OpenLayers.Control}
- * @constructor
- */
-OpenLayers.Control.Zoom = function() {};
-
-/**
- * @extends {OpenLayers.Control}
- * @constructor
- */
 OpenLayers.Control.ArgParser = function() {};
 
 /**
@@ -194,7 +182,46 @@ OpenLayers.Control.Attribution = function() {};
  * @extends {OpenLayers.Control}
  * @constructor
  */
+OpenLayers.Control.Button = function(opt_options) {};
+
+/**
+ * @param {function (new:OpenLayers.Handler.Path, (OpenLayers.Control|null), (Object|null), (Object|null)): ?} handler
+ * @param {Object=} opt_options
+ * @extends {OpenLayers.Control}
+ * @constructor
+ */
+OpenLayers.Control.Measure = function(handler, opt_options) {};
+
+/**
+ * @param {OpenLayers.Geometry} geometry
+ * @return {Array.<(number|string)>}
+ */
+OpenLayers.Control.Measure.prototype.getBestLength = function(geometry) {};
+
+/**
+ * @param {Object=} opt_options
+ * @extends {OpenLayers.Control}
+ * @constructor
+ */
 OpenLayers.Control.MousePosition = function(opt_options) {};
+
+/**
+ * @extends {OpenLayers.Control}
+ * @constructor
+ */
+OpenLayers.Control.Navigation = function() {};
+
+/**
+ * @param {Object=} opt_options
+ * @extends {OpenLayers.Control}
+ * @constructor
+ */
+OpenLayers.Control.Panel = function(opt_options) {};
+
+/**
+ * @param {Array.<OpenLayers.Control>} controls
+ */
+OpenLayers.Control.Panel.prototype.addControls = function(controls) {};
 
 /**
  * @param {Object=} opt_options
@@ -227,6 +254,12 @@ OpenLayers.Control.SelectFeature.prototype.setLayer = function(layers) {};
  * @param {Object=} opt_options
  */
 OpenLayers.Control.SelectFeature.prototype.unselectAll = function(opt_options) {};
+
+/**
+ * @extends {OpenLayers.Control}
+ * @constructor
+ */
+OpenLayers.Control.Zoom = function() {};
 
 OpenLayers.Event = {};
 
@@ -553,6 +586,13 @@ OpenLayers.Geometry.Collection = function(components) {};
 OpenLayers.Geometry.Collection.prototype.components;
 
 /**
+ * @param {Array.<OpenLayers.Geometry.Point>} point
+ * @extends {OpenLayers.Geometry.MultiPoint}
+ * @constructor
+ */
+OpenLayers.Geometry.Curve = function(point) {};
+
+/**
  * @param {Array.<OpenLayers.Geometry.Point>} points
  * @extends {OpenLayers.Geometry.LineString}
  * @constructor
@@ -567,10 +607,17 @@ OpenLayers.Geometry.LinearRing.prototype.containsPoint = function(point) {};
 
 /**
  * @param {Array.<OpenLayers.Geometry.Point>} points
- * @extends {OpenLayers.Geometry.Collection}
+ * @extends {OpenLayers.Geometry.Curve}
  * @constructor
  */
 OpenLayers.Geometry.LineString = function(points) {};
+
+/**
+ * @param {Array.<OpenLayers.Geometry.Point>} components
+ * @extends {OpenLayers.Geometry.Collection}
+ * @constructor
+ */
+OpenLayers.Geometry.MultiPoint = function(components) {};
 
 /**
  * @param {Array.<OpenLayers.Geometry.Polygon>} components
@@ -687,6 +734,24 @@ OpenLayers.Handler.Feature.prototype.stopDown;
  * @type {boolean}
  */
 OpenLayers.Handler.Feature.prototype.stopUp;
+
+/**
+ * @param {OpenLayers.Control} control
+ * @param {Object} callbacks
+ * @param {Object} options
+ * @extends {OpenLayers.Handler.Point}
+ * @constructor
+ */
+OpenLayers.Handler.Path = function(control, callbacks, options) {};
+
+/**
+ * @param {OpenLayers.Control} control
+ * @param {Object} callbacks
+ * @param {Object} options
+ * @extends {OpenLayers.Handler}
+ * @constructor
+ */
+OpenLayers.Handler.Point = function(control, callbacks, options) {};
 
 /**
  * @param {string} url
@@ -1393,6 +1458,11 @@ OpenLayers.Style = function(opt_style, opt_options) {};
 OpenLayers.Style.prototype.context;
 
 /**
+ * @param {Array.<OpenLayers.Rule>} rules
+ */
+OpenLayers.Style.prototype.addRules = function(rules) {};
+
+/**
  * @param {Object=} opt_style
  * @param {Object=} opt_options
  * @constructor
@@ -1439,4 +1509,3 @@ OpenLayers.Util.getResolutionFromScale = function(scale, units) {};
  * @return {number}
  */
 OpenLayers.Util.getScaleFromResolution = function(resolution, units) {};
-
