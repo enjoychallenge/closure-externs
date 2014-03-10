@@ -1212,6 +1212,11 @@ OpenLayers.Map.prototype.getZoomForResolution = function(resolution, opt_closest
 OpenLayers.Map.prototype.panTo = function(lonlat) {};
 
 /**
+ * @param {OpenLayers.Control} control
+ */
+OpenLayers.Map.prototype.removeControl = function(control) {};
+
+/**
  * @param {OpenLayers.Layer} layer
  */
 OpenLayers.Map.prototype.removeLayer = function(layer) {};
