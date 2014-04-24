@@ -1,5 +1,5 @@
 /**
- * @fileoverview Externs for OpenLayers.
+ * @fileoverview Externs for OpenLayers 2.x.
  * @externs
  */
 var OpenLayers = {};
