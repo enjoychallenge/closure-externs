@@ -119,8 +119,8 @@ OpenLayers.Bounds.prototype.toBBOX = function(opt_decimal, opt_reverseAxisOrder)
 OpenLayers.Bounds.prototype.toString = function() {};
 
 /**
- * @param {OpenLayers.Projection} source
- * @param {OpenLayers.Projection} dest
+ * @param {OpenLayers.Projection|string} source
+ * @param {OpenLayers.Projection|string} dest
  */
 OpenLayers.Bounds.prototype.transform = function(source, dest) {};
 
@@ -1479,7 +1479,35 @@ OpenLayers.StyleMap = function(opt_style, opt_options) {};
  */
 OpenLayers.StyleMap.prototype.styles;
 
-OpenLayers.Util = {}
+/**
+ * @param {OpenLayers.Layer} layer
+ * @param {OpenLayers.Pixel} position
+ * @param {OpenLayers.Bounds} bounds
+ * @param {string} url
+ * @param {OpenLayers.Size} size
+ * @param {Object=} opt_options
+ * @constructor
+ */
+OpenLayers.Tile = function(layer, position, bounds, url, size, opt_options) {};
+
+/**
+ * @type {OpenLayers.Layer}
+ */
+OpenLayers.Tile.prototype.layer;
+
+/**
+ * @param {OpenLayers.Layer} layer
+ * @param {OpenLayers.Pixel} position
+ * @param {OpenLayers.Bounds} bounds
+ * @param {string} url
+ * @param {OpenLayers.Size} size
+ * @param {Object=} opt_options
+ * @constructor
+ * @extends {OpenLayers.Tile}
+ */
+OpenLayers.Tile.Image = function(layer, position, bounds, url, size, opt_options) {};
+
+OpenLayers.Util = {};
 
 /**
  * @param {Object} to
