@@ -1,7 +1,7 @@
 closure-externs
 ===========
 
-[Externs](https://developers.google.com/closure/compiler/docs/api-tutorial3?hl=cs) for [Closure Compiler](https://developers.google.com/closure/compiler/) covering libraries
+[Externs](https://developers.google.com/closure/compiler/docs/api-tutorial3?hl=cs) for [Closure Compiler](https://developers.google.com/closure/compiler/) partially covering libraries
 * [OpenLayers 2.x](http://www.openlayers.org/)
 * [Google Analytics Universal](http://www.google.com/analytics/)
 * [Browser-Update.org](http://www.browser-update.org/)
