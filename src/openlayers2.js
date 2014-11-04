@@ -185,7 +185,7 @@ OpenLayers.Control.Attribution = function() {};
 OpenLayers.Control.Button = function(opt_options) {};
 
 /**
- * @param {function (new:OpenLayers.Handler.Path, (OpenLayers.Control|null), (Object|null), (Object|null)): ?} handler
+ * @param {function (new:OpenLayers.Handler, (OpenLayers.Control|null), (Object|null), (Object|null)): ?} handler
  * @param {Object=} opt_options
  * @extends {OpenLayers.Control}
  * @constructor
