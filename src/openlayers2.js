@@ -275,11 +275,6 @@ OpenLayers.Event.stop = function(evt) {};
 OpenLayers.EventObject = function() {};
 
 /**
- * @type {OpenLayers.Pixel}
- */
-OpenLayers.EventObject.prototype.xy;
-
-/**
  * @type {OpenLayers.Feature.Vector}
  */
 OpenLayers.EventObject.prototype.feature;
@@ -290,14 +285,39 @@ OpenLayers.EventObject.prototype.feature;
 OpenLayers.EventObject.prototype.features;
 
 /**
+ * @type {number}
+ */
+OpenLayers.EventObject.prototype.measure;
+
+/**
+ * @type {number}
+ */
+OpenLayers.EventObject.prototype.order;
+
+/**
  * @type {Object}
  */
 OpenLayers.EventObject.prototype.target;
 
 /**
+ * @type {string}
+ */
+OpenLayers.EventObject.prototype.units;
+
+/**
+ * @type {OpenLayers.Pixel}
+ */
+OpenLayers.EventObject.prototype.xy;
+
+/**
  * @constructor
  */
 OpenLayers.Events = function() {};
+
+/**
+ * @param {Object} object
+ */
+OpenLayers.Events.prototype.on = function(object) {};
 
 /**
  * @param {string} type
@@ -754,6 +774,15 @@ OpenLayers.Handler.Path = function(control, callbacks, options) {};
 OpenLayers.Handler.Point = function(control, callbacks, options) {};
 
 /**
+ * @param {OpenLayers.Control} control
+ * @param {Object} callbacks
+ * @param {Object} options
+ * @extends {OpenLayers.Handler}
+ * @constructor
+ */
+OpenLayers.Handler.Polygon = function(control, callbacks, options) {};
+
+/**
  * @param {string} url
  * @param {OpenLayers.Size|Object} size
  * @param {OpenLayers.Pixel|Object} offset
@@ -938,6 +967,11 @@ OpenLayers.Layer.Vector = function(title, opt_options) {};
  * @type {Array.<OpenLayers.Feature.Vector>}
  */
 OpenLayers.Layer.Vector.prototype.features;
+
+/**
+ * @type {Array.<string>}
+ */
+OpenLayers.Layer.Vector.prototype.renderers;
 
 /**
  * @type {Array.<OpenLayers.Feature.Vector>}
