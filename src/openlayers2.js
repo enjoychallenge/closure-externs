@@ -887,6 +887,15 @@ OpenLayers.Layer.ArcGIS93Rest.prototype.getURL = function(bounds) {};
  */
 OpenLayers.Layer.ArcGIS93Rest.prototype.url;
 
+/** 
+ * @param {string} name 
+ * @param {string} url 
+ * @param {Object=} opt_options 
+ * @extends {OpenLayers.Layer.Grid} 
+ * @constructor 
+ */ 
+OpenLayers.Layer.ArcGISCache = function(name, url, opt_options) {};
+
 /**
  * @param {string|undefined} title
  * @param {Object|undefined} options
