@@ -6,7 +6,7 @@
 /**
  * @param {string} p1
  * @param {(Object|string)=} opt_p2
- * @param {string=} opt_p3
+ * @param {(string|number)=} opt_p3
  * @param {string=} opt_p4
  * @param {string=} opt_p5
  * @param {number=} opt_p6
